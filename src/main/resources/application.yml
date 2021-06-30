@@ -1,0 +1,29 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: demo
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: xxx
+            client-secret: xxx
+            client-name: "demo"
+            provider: keycloak
+            scope: "openid, email"
+            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            authorization-uri: http://keycloak:8080/auth/realms/lorem/protocol/openid-connect/auth
+            token-uri: http://keycloak:8080/auth/realms/lorem/protocol/openid-connect/token
+            user-info-uri: http://keycloak:8080/auth/realms/lorem/protocol/openid-connect/userinfo
+            user-info-authentication-method: header
+            jwk-set-uri: http://keycloak:8080/auth/realms/lorem/protocol/openid-connect/certs
+            end-session-endpoint: http://keycloak:8080/auth/realms/lorem/protocol/openid-connect/logout
+            user-name-attribute: sub
